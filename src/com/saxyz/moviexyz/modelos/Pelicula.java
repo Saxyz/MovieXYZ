@@ -1,79 +1,28 @@
 package com.saxyz.moviexyz.modelos;
+import com.saxyz.moviexyz.calculos.Clasificable;
 
-public class Pelicula {
-    private String titulo;
-    private int fechaLanzamiento;
-    private int duracionMinutos;
-    private boolean incluidoEnPlan;
-    private double sumaCalificaciones;
-    private int cantidadCalificaciones;
+public class Pelicula extends Titulo implements Clasificable {
+    private String director;
 
-    public void agregarCalificacion(double calificacion){
-        if (calificacion > 0 && calificacion < 10) {
-            sumaCalificaciones += calificacion;
-            cantidadCalificaciones++;
-        }
+    public Pelicula(String nombre, int fechaDeLanzamiento) {
+        super(nombre, fechaDeLanzamiento);
     }
 
-    public double calcularPromedio(){
-        return sumaCalificaciones / cantidadCalificaciones;
+    public String getDirector() {
+        return director;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public void setDirector(String director) {
+        this.director = director;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public int getFechaLanzamiento() {
-        return fechaLanzamiento;
-    }
-
-    public void setFechaLanzamiento(int fechaLanzamiento) {
-        this.fechaLanzamiento = fechaLanzamiento;
-    }
-
-    public int getDuracionMinutos() {
-        return duracionMinutos;
-    }
-
-    public void setDuracionMinutos(int duracionMinutos) {
-        this.duracionMinutos = duracionMinutos;
-    }
-
-    public boolean isIncluidoEnPlan() {
-        return incluidoEnPlan;
-    }
-
-    public void setIncluidoEnPlan(boolean incluidoEnPlan) {
-        this.incluidoEnPlan = incluidoEnPlan;
-    }
-
-    public double getSumaCalificaciones() {
-        return sumaCalificaciones;
-    }
-
-    public int getCantidadCalificaciones() {
-        return cantidadCalificaciones;
+    @Override
+    public int getClasificacion() {
+        return (int) calculaMediaEvaluaciones() / 2;
     }
 
     @Override
     public String toString() {
-        return "---------------- \n" +
-                "com.saxyz.moviexyz.modelos.Pelicula \n" +
-                "Titulo = '" + titulo + '\'' +
-                ", Fecha de lanzamiento = " + fechaLanzamiento +
-                ", Duracion en minutos = " + duracionMinutos +
-                ", Incluido en el plan = " + incluidoEnPlan +
-                "\n----------------";
-    }
-
-    public Pelicula(String titulo, int fechaLanzamiento, int duracionMinutos, boolean incluidoEnPlan) {
-        this.titulo = titulo;
-        this.fechaLanzamiento = fechaLanzamiento;
-        this.duracionMinutos = duracionMinutos;
-        this.incluidoEnPlan = incluidoEnPlan;
+        return "Pelicula: " + this.getNombre() + " (" + getFechaDeLanzamiento() + ")";
     }
 }
